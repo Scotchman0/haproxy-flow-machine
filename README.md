@@ -62,10 +62,9 @@ A[Client] --> B(HAProxy Load Balancer)
 B --> C{Protocol}
 C -->|HTTP| D[Backend Server]
 C -->|HTTPS Edge| E(HAProxy terminates SSL)
-E --> F[Backend Server recieves unencrypted traffic]
-C -->|HTTPS Passthrough| G(HAProxy passes encrypted traffic to endpoint)
-G --> H[Backend Server terminates SSL]
-C -->|HTTPS Reencrypt| I(HAProxy reencrypts SSL)
-I --> J(HAProxy terminates SSL and then applies new )
-J --> K[Backend Server terminates SSL]
+E --> F[Backend Server]
+C -->|HTTPS Passthrough| G(HAProxy passes encrypted traffic to backend)
+G --> H[Backend (terminates SSL)]
+C -->|HTTPS Reencrypt| I(HAProxy terminates then encrypts SSL)
+I --> J[Backend (terminates newly encrypted SSL)]
 ```
