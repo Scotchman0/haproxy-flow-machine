@@ -1,3 +1,4 @@
+```mermaid
 flowchart LR;
     subgraph Client
         A[Start Connection]
@@ -24,3 +25,4 @@ flowchart LR;
     subgraph Load Balancer -> Backend
         E --> F
     end
+```
