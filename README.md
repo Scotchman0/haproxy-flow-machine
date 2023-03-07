@@ -1,5 +1,5 @@
 ```mermaid
-flowchart LR;
+graph LR;
     subgraph Client
         A[Start Connection]
     end
