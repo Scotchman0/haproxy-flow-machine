@@ -55,3 +55,17 @@ graph LR
   I -->|12. ServerHello| B;
   B -->|13. ServerHello| A;
 ```
+
+```mermaid
+graph LR
+A[Client] --> B(HAProxy Load Balancer)
+B --> C{Protocol}
+C -->|HTTP| D[Backend Server]
+C -->|HTTPS Edge| E(HAProxy terminates SSL)
+E --> F[Backend Server]
+C -->|HTTPS Passthrough| G(HAProxy passes SSL through)
+G --> H[Backend Server]
+C -->|HTTPS Reencrypt| I(HAProxy reencrypts SSL)
+I --> J(HAProxy terminates SSL)
+J --> K[Backend Server]
+```
