@@ -66,5 +66,5 @@ E --> F[Backend Server]
 C -->|HTTPS Passthrough| G(HAProxy passes encrypted traffic to backend)
 G --> H[Backend (terminates SSL)]
 C -->|HTTPS Reencrypt| I(HAProxy terminates then encrypts SSL)
-I --> J[Backend (terminates newly encrypted SSL)]
+I --> J(Backend (terminates newly encrypted SSL))
 ```
