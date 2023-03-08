@@ -90,7 +90,7 @@ sequenceDiagram
     Haproxy->>-Backend: ACK
     Backend->>+Haproxy: HTTP/1.1 200 OK
     Haproxy->>-Client: HTTP/1.1 200 OK
-    
+
     Client->>+Haproxy: FIN
     Haproxy->>-Client: FIN-ACK
     Haproxy->>+Backend: FIN
