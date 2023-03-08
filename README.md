@@ -68,3 +68,39 @@ G --> H[Backend terminates SSL]
 C -->|HTTPS Reencrypt| I(HAProxy terminates then encrypts SSL)
 I --> J(Backend terminates newly encrypted SSL)
 ```
+
+
+===============
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Haproxy
+    participant Backend
+
+    Client->>+Haproxy: SYN
+    Haproxy->>-Client: SYN-ACK
+    Client->>+Haproxy: ACK
+
+    Client->>+Haproxy: GET / HTTP/1.1
+    Haproxy->>-Backend: GET / HTTP/1.1
+    Haproxy->>+Backend: SYN
+    Backend->>-Haproxy: SYN-ACK
+    Haproxy->>-Backend: ACK
+    Backend->>+Haproxy: HTTP/1.1 200 OK
+    Haproxy->>-Client: HTTP/1.1 200 OK
+
+    Client->>+Haproxy: GET /api/data HTTP/1.1
+    Haproxy->>-Backend: GET /api/data HTTP/1.1
+    Haproxy->>+Backend: SYN
+    Backend->>-Haproxy: SYN-ACK
+    Haproxy->>-Backend: ACK
+    Backend->>+Haproxy: HTTP/1.1 200 OK
+    Haproxy->>-Client: HTTP/1.1 200 OK
+
+    Client->>+Haproxy: FIN
+    Haproxy->>-Client: FIN-ACK
+    Haproxy->>+Backend: FIN
+    Backend->>-Haproxy: FIN-ACK
+    Backend->>+Haproxy: ACK
+    Haproxy->>-Backend: ACK
+```
