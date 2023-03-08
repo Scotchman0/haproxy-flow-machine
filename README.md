@@ -82,9 +82,6 @@ sequenceDiagram
     Client->>+Haproxy: SYN
     Haproxy->>-Client: SYN-ACK
     Client->>+Haproxy: ACK
-```
-
-
 
     Client->>+Haproxy: GET / HTTP/1.1
     Haproxy->>-Backend: GET / HTTP/1.1
@@ -93,6 +90,7 @@ sequenceDiagram
     Haproxy->>-Backend: ACK
     Backend->>+Haproxy: HTTP/1.1 200 OK
     Haproxy->>-Client: HTTP/1.1 200 OK
+```
 
     Client->>+Haproxy: GET /api/data HTTP/1.1
     Haproxy->>-Backend: GET /api/data HTTP/1.1
