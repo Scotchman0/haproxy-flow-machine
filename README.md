@@ -72,7 +72,7 @@ I --> J(Backend terminates newly encrypted SSL)
 
 ===============
 ```mermaid
-graph LR
+sequenceDiagram
     participant Client
     participant Haproxy
     participant Backend
