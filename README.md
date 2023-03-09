@@ -135,3 +135,17 @@ sequenceDiagram
   HAProxy-->>-Client: Forward re-encrypted response
 
 ```
+# passthrough
+```mermaid
+sequenceDiagram
+  participant Client
+  participant HAProxy
+  participant Backend
+
+  Client->>+HAProxy: Send encrypted GET request
+  HAProxy->>+Backend: Forward encrypted request
+  Note over Backend: Terminate TLS\nand decrypt request
+  Backend-->>-HAProxy: Send response
+  Note over HAProxy: Forward encrypted response\nto Client
+  HAProxy-->>-Client: Forward encrypted response
+```
