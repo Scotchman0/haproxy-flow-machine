@@ -117,18 +117,13 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
   participant Client
-  participant HAProxy1
-  participant HAProxy2
+  participant HAProxy
   participant Backend
 
-  Client->>+HAProxy1: Send GET request
-  Note over HAProxy1: Terminate TLS\nand decrypt request
-  HAProxy1->>+Backend: Forward decrypted request
-  Backend-->>-HAProxy1: Send response
-  Note over HAProxy1: Encrypt response\nand create TLS tunnel to HAProxy2
-  HAProxy1->>+HAProxy2: Forward TLS tunnel
-  Note over HAProxy2: Decrypt tunnel\nand re-encrypt using own certificate
-  HAProxy2-->>-HAProxy1: Forward re-encrypted tunnel
-  Note over HAProxy1: Forward encrypted response\nto Client
-  HAProxy1-->>-Client: Forward encrypted response
+  Client->>+HAProxy: Send GET request
+  Note over HAProxy: Terminate TLS\nand decrypt request
+  HAProxy->>+Backend: Forward decrypted request
+  Backend-->>-HAProxy: Send response
+  Note over HAProxy: Encrypt response\nand create TLS tunnel to Client
+  HAProxy-->>-Client: Forward re-encrypted response
 ```
