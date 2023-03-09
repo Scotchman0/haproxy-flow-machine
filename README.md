@@ -99,3 +99,17 @@ sequenceDiagram
     Backend->>+Haproxy: ACK
     Haproxy->>-Backend: ACK
 ```
+
+```mermaid
+sequenceDiagram
+  participant Client
+  participant HAProxy
+  participant Backend
+
+  Client->>+HAProxy: Send GET request
+  Note over HAProxy: Terminate TLS\nand decrypt request
+  HAProxy->>+Backend: Forward decrypted request
+  Backend-->>-HAProxy: Send response
+  Note over HAProxy: Encrypt response\nand create TLS tunnel
+  HAProxy-->>-Client: Forward encrypted response
+  ```
