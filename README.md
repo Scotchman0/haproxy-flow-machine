@@ -72,7 +72,7 @@ I --> J(Backend terminates newly encrypted SSL)
 
 ===============
 
-
+# connection lifecycle on unencryped route:
 ```mermaid
 sequenceDiagram
     participant Client
@@ -100,6 +100,7 @@ sequenceDiagram
     Haproxy->>-Backend: ACK
 ```
 
+# edge encrypted:
 ```mermaid
 sequenceDiagram
   participant Client
@@ -114,16 +115,23 @@ sequenceDiagram
   HAProxy-->>-Client: Forward encrypted response
   ```
 
+# re-encrypted
 ```mermaid
 sequenceDiagram
   participant Client
   participant HAProxy
   participant Backend
 
-  Client->>+HAProxy: Send GET request
-  Note over HAProxy: Terminate TLS\nand decrypt request
-  HAProxy->>+Backend: Forward decrypted request
-  Backend-->>-HAProxy: Send response
+  Client->>+HAProxy: Send encrypted GET request
+  Note over HAProxy: Decrypt request\nand re-encrypt using own certificate
+  HAProxy->>+Backend: Forward re-encrypted request
+  Note over Backend: Terminate TLS\nand decrypt request
+  Backend->>+HAProxy: Forward decrypted request
   Note over HAProxy: Encrypt response\nand create TLS tunnel to Client
+  HAProxy-->>-Backend: Forward encrypted response
+  Note over Backend: Encrypt response\nand create TLS tunnel to HAProxy
+  Backend-->>-HAProxy: Forward encrypted response
+  Note over HAProxy: Forward re-encrypted response\nto Client
   HAProxy-->>-Client: Forward re-encrypted response
+
 ```
