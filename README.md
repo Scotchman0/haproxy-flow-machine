@@ -156,14 +156,14 @@ sequenceDiagram
 ```mermaid
 graph LR
   subgraph sharded ingress controller
-    shardedRoutes{{routes labeled 'sharded=true'}} --> shardedIC[sharded ingress controller]
+    shardedRoutes{{routes labeled 'sharded=true', shard-apps.mycluster.mydomain}} --> shardedIC[sharded ingress controller]
     shardedIC --> D[routeD]
     shardedIC --> E[routeE]
     shardedIC --> F[routeF]
   end
   
   subgraph default ingress controller
-    unlabeledRoutes{{routes not labeled 'sharded=true'}} --> defaultIC[default ingress controller]
+    unlabeledRoutes{{routes not labeled 'sharded=true', apps.mycluster.mydomain}} --> defaultIC[default ingress controller]
     defaultIC --> A[routeA]
     defaultIC --> B[routeB]
     defaultIC --> C[routeC]
