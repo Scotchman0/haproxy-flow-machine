@@ -157,12 +157,23 @@ sequenceDiagram
 graph LR
   subgraph sharded ingress controller
     shardedRoutes{{routes labeled 'sharded=true'}} --> shardedIC[sharded ingress controller]
+    shardedIC --> D[routeD]
+    shardedIC --> E[routeE]
+    shardedIC --> F[routeF]
   end
   
   subgraph default ingress controller
     unlabeledRoutes{{routes not labeled 'sharded=true'}} --> defaultIC[default ingress controller]
+    defaultIC --> A[routeA]
+    defaultIC --> B[routeB]
+    defaultIC --> C[routeC]
   end
   
-  defaultIC --> allRoutes[all 6 routes]
-  shardedIC --> shardedRoutes
+  A-- HTTP/HTTPS --> internet[Internet]
+  B-- HTTP/HTTPS --> internet
+  C-- HTTP/HTTPS --> internet
+  D-- HTTPS --> internet
+  E-- HTTPS --> internet
+  F-- HTTPS --> internet
+
 ```
