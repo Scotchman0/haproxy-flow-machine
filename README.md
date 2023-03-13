@@ -172,8 +172,9 @@ graph LR
   A-- HTTP/HTTPS --> internet[Internet]
   B-- HTTP/HTTPS --> internet
   C-- HTTP/HTTPS --> internet
-  D-- HTTPS --> internet
-  E-- HTTPS --> internet
-  F-- HTTPS --> internet
+  D-- HTTP/HTTPS --> internet
+  E-- HTTP/HTTPS --> internet
+  F-- HTTP/HTTPS --> internet
 
 ```
+
