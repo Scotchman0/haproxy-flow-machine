@@ -149,3 +149,20 @@ sequenceDiagram
   Note over HAProxy: Forward encrypted response\nto Client
   HAProxy-->>-Client: Forward encrypted response
 ```
+
+
+================
+
+```mermaid
+graph LR
+  subgraph sharded ingress controller
+    shardedRoutes{{routes labeled 'sharded=true'}} --> shardedIC[sharded ingress controller]
+  end
+  
+  subgraph default ingress controller
+    unlabeledRoutes{{routes not labeled 'sharded=true'}} --> defaultIC[default ingress controller]
+  end
+  
+  defaultIC --> allRoutes[all 6 routes]
+  shardedIC --> shardedRoutes
+```
